@@ -9,3 +9,5 @@ sbmt1.onclick = function handle1() {
     const length3 = Math.sqrt(length1**2 + length2**2);
     rslt1.textContent = "Ladder Length: " + length3.toString();
 };
+
+const 

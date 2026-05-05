@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ladder Length Calculator</title>
+    <style>
+        * {
+            font-family: Arial;
+            font-weight: bold;
+        }
+        button{
+            font-size: 16px;
+            margin-top: 10px; 
+        }
+    </style>
+</head>
+<body>
+    <h1>Math QUIZ</h1>
+    <h2 id="question1"></h2>
+    <input type="number" id="answer1" placeholder="Enter your answer"/>
+    <button id="submit">Submit</button>
+    <p id="result"></p>
+   
+ 
+</body>
+<script>
+    const submitBtn = document.getElementById("submit");
+    const question1 = document.getElementById("question1");
+    const answer1 = document.getElementById("answer1");
+    const result = document.getElementById("result");
+    
+    const list1 = [
+        {q: "What is 2 to the power of 3?", a: 8},
+        {q: "What is the square root of 16?", a: 4},
+        {q: "What is 10 divided by 2?", a: 5},  
+        {q: "What is 5 multiplied by 6?", a: 30},
+        {q: "What is 15 minus 7?", a: 8}
+    ]
+
+    let index = 0;
+    let count1 = 0;
+
+    updateQuestion();
+    function updateQuestion(){
+        if(index < list1.length){
+            question1.textContent = list1[index].q;
+        } else {
+            question1.textContent = "Quiz Completed!";
+            submitBtn.disabled = true;
+            rslt();
+        }
+    }
+    const rslt = function handle1(){
+        if(index === list1.length){
+            result.textContent = `You got ${count1} out of ${list1.length} correct!`;
+        }
+    }
+
+    submitBtn.addEventListener("click", function(){
+        const userAnswer = parseInt(answer1.value);
+        if(userAnswer === list1[index].a){
+            count1++;
+        }
+        index++;
+        answer1.value = "";
+        updateQuestion();
+    });
+</script>
+</html>
