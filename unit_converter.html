@@ -20,7 +20,7 @@
     const rslt2 = document.getElementById("result2");
     
     smt1.onclick = function handle1() {
-        let value1 = Number(inp1.value);
+        const value1 = Number(inp1.value);
        
         rslt1.textContent =  `Miles to Km: ${value1 * 1.609}`;
         rslt2.textContent =  `Km to Miles: ${value1 / 1.609}`;

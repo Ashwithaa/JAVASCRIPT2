@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interest Calculator</title>
+</head>
+<body>
+  <h1>Interest Calculator</h1>
+  <input type="number" id="principle_amount" placeholder="Principle Amount"/><br/>
+  <input type="number" id="term" placeholder="Term" /><br/>
+  <input type="number" id="interest" placeholder="Interest"><br/>
+  
+  <button id="submit">Calculate</button>
+  <p id="interest1"></p>
+
+</body>
+<script>
+    const submitBtn = document.getElementById("submit");
+    submitBtn.onclick = function handle1(){
+        const p = document.getElementById("principle_amount").value;
+        const r = document.getElementById("interest").value;
+        const t = document.getElementById("term").value;
+
+        const result = (p * r * t) / 100; 
+        document.getElementById("interest1").textContent = `Payable Interest: ${parseFloat(result)}`;
+    }
+</script>
+</html>
