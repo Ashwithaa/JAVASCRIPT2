@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Converter</title>
+</head>
+<body>
+    <input type="number" id="input1">
+    <button id="button1">Submit</button>
+    <p id="p1"></p>
+    <p id="p2"></p>
+    <script>
+        const inp1 = document.getElementById("input1");
+        const btn1 = document.getElementById("button1");
+        const txt1 = document.getElementById("p1");
+        const txt2 = document.getElementById("p2");
+
+        btn1.onclick = function handle(){
+            const value1 = Number(inp1.value);
+            
+            txt1.textContent = "Miles to KM: " + Number(value1 * 1.609) ; 
+            txt2.textContent = "KM to Miles: " + Number(value1 / 1.609) ; 
+        }
+    </script>
+</body>
+</html>
