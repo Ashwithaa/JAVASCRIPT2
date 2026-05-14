@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Expenses Tracker</title>
+    <style>
+		.expense-tracker-block{
+			border: 1px solid #ccc;
+			box-shadow: lightskyblue;
+			padding: 32px;
+			border-radius: 20px;
+			margin: auto;
+		}
+        h1{
+            font-size: 36;
+            text-align: center;
+        }
+		.widget{
+			background-color:rgb(239 226 226);
+		    font-size: 18px;
+		    text-align: center;
+			vertical-align: center;
+			min-width: 300px;
+			height: 100px;
+			border-radius: 20px;
+			display: flex;
+			align-items: center;
+			font-size: 28px;
+			justify-content: center;
+			margin: auto;
+			font-weight: 700;
+		}
+		.widget-block{
+		    display: flex;
+			gap: 64px;
+		    flex-direction: row;
+			width: 100%;
+		    margin: 32px auto;
+		}
+		.input-form{
+			margin: auto;
+			width: 100%;
+			display: flex;
+			justify-content: center;
+        }
+		.btn{
+			margin-left: 16px;
+		}
+		.input-field{
+			height: 30px;
+			margin-left: 16px;
+		}
+				
+		table{
+			width: 100%;
+		}
+		table th, table td{
+			border: 1px solid #ccc;
+			text-align: left;
+		}
+		#error_msg{
+			color:red;
+			font-size:14px;
+			text-align: center;
+		}
+    </style>
+</head>
+<body>
+	<section class="expense-tracker-block">
+        <h1>Expenses Tracker</h1>
+		<div class="widget-block">
+			<div id="total_amount" class="widget">Total : 0</div>
+	    </div>
+        <br/>
+		<div class="input-form">
+			<input type="date" id="transaction_date" class="input-field" />
+			<input type="number" id="amount" class="input-field" placeholder="Enter Amount"/>
+			<input type="text" id="description" class="input-field" placeholder="Enter description" />
+			<br/><br/>
+			<button type="submit" id="submit" class="btn">Add Expense</button>
+			<br/>
+		</div>
+
+		<p id="error_msg"></p><br/><br/>
+        <h3>Expenses Details</h3>
+		<div class="exp_details">
+			<table>
+				<thead>
+				<tr>
+					<th>#</th>
+					<th>Date</th>
+					<th>Amount</th>
+					<th>Description</th>
+					<th>Action</th>
+				</tr>
+					</thead>
+					<tbody id="expenses_list"></tbody>
+			</table>
+		</div>
+    </section>
+		<script>
+			const tdt1 = document.getElementById("transaction_date");
+			const amt1 = document.getElementById("amount");
+			const des1 = document.getElementById("description");
+			const smt1 = document.getElementById("submit");
+			const t_widget = document.getElementById("total_amount");
+			const eList = document.getElementById("expenses_list");
+			const errMsg = document.getElementById("error_msg");
+
+			const expenses = [];
+	        smt1.onclick = function handle1(){
+				let date1 = tdt1.value;
+				let amount1 = Number(amt1.value);
+				let description1 = des1.value;
+				if( date1 == '' || amount1 =='' || description1 ==''){
+					errMsg.textContent = "All fields are mandatory" ; 
+					return;
+				}
+			
+				if((date1!== '' ) && ((amount1!== '') && amount1 > 0) ){
+                    expenses.push([date1, amount1,description1]);
+				}
+                t_widget.textContent = `Total: ${totalAmount()}`; 
+				updateRow();
+				tdt1.value = "";
+				amt1.value = "";
+				des1.value = "";
+				errMsg.textContent = "";
+			}
+
+			const totalAmount = () => {
+				 return expenses.reduce((sum, e) => sum + Number(e[1]), 0);
+			}
+
+			const updateRow = () => {
+				if(expenses.length > 0){
+				    eList.innerHTML = expenses.map((e, count) =>
+					`<tr><td>${count+1}</td>
+						<td>${e[0]}</td>
+						<td>${e[1]}</td>
+						<td>${e[2]}</td>
+                        <td>Edit / Delete</td>
+						</tr>`).join(" ");
+				} else {
+						eList.innerHTML =`<tr><td colspan=5" style="text-align:center">--- No expenses yet ---</td></tr>`;
+				}
+			};
+			
+            updateRow();
+
+		</script>
+    </body>
+</html>
