@@ -3,27 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unit Converter</title>
+    <title>Order List</title>
 </head>
 <body>
-    <h1>Unit Converter</h1>
-    <br/>
-    <input type="number" id="input1" />
-    <button id="submit1" >Submit</button>
-    <p id="result1"></p>
-    <p id="result2"></p>
-</body>
-<script>
-    const inp1  = document.getElementById("input1");
-    const smt1  = document.getElementById("submit1");
-    const rslt1 = document.getElementById("result1");
-    const rslt2 = document.getElementById("result2");
+    <select id="select1" >
+        <option disabled selected>Select Unit</option>
+        <option value="0">Dollar-Rs</option>
+        <option value="1">Meter-Cm</option>
+        <option value="2">Inch-Feet</option>
+        <option value="3">Km-Mile</option>
+        <option value="4">Kg-Pound</option>
+        <option value="5">Centigrade-Fahrenheit</option>
+    </select>
+    <input type="text" id="input1">
+    <button id="button1">Submit</button>
+    <p id="line1"></p>
     
-    smt1.onclick = function handle1() {
-        const value1 = Number(inp1.value);
+    <script>
+        const sel1 = document.getElementById("select1");
+        const btn1 = document.getElementById("button1");
+        const inp1 = document.getElementById("input1");
+        const ln1  = document.getElementById("line1");
+
+        const units = [
+                ['Dollar', 'Rs', 1, 83],
+                ['Meter', 'Cm', 1, 100],
+                ['Inch', 'Feet', 1, 0.0833],
+                ['Km', 'Mile', 1, 0.621],
+                ['Kg', 'Pound', 1, 2.204],
+                ['Centigrade', 'Fahrenheit', 1, '33.3']
+            ];    
+
+        btn1.onclick = function handle1(){
+            const index = sel1.value;
+            const value1 = Number(inp1.value);
+            
+            const [fromLabel, toLabel, fromRatio, toRatio] = units[index]; //This method is destructing array - unpacking array
+            
+            const result = (value1 / fromRatio) * toRatio; //Universal Formula
+            line1.textContent = `${fromLabel}  ${fromRatio} = ${result} ${toLabel}`;
+
+        }
        
-        rslt1.textContent =  `Miles to Km: ${value1 * 1.609}`;
-        rslt2.textContent =  `Km to Miles: ${value1 / 1.609}`;
-    }
-</script>
+    </script>
+</body>
 </html>
