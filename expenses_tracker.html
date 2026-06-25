@@ -74,7 +74,7 @@
 	    </div>
         <br/>
 		<div class="input-form">
-			<input type="date" id="transaction_date" class="input-field" />
+			<input type="date" id="transaction_date" class="input-field" vlaue="" />
 			<input type="number" id="amount" class="input-field" placeholder="Enter Amount"/>
 			<input type="text" id="description" class="input-field" placeholder="Enter description" />
 			<br/><br/>
@@ -100,6 +100,11 @@
 		</div>
     </section>
 		<script>
+			const today = new Date();
+			const current_date = String(today.getDate()) + '-' + today.getMonth() + '-' + today.getFullYear();
+            
+			console.log(current_date);
+			 document.getElementById("transaction_date").value = current_date;
 			const tdt1 = document.getElementById("transaction_date");
 			const amt1 = document.getElementById("amount");
 			const des1 = document.getElementById("description");
@@ -107,7 +112,7 @@
 			const t_widget = document.getElementById("total_amount");
 			const eList = document.getElementById("expenses_list");
 			const errMsg = document.getElementById("error_msg");
-
+			
 			const expenses = [];
 	        smt1.onclick = function handle1(){
 				let date1 = tdt1.value;
